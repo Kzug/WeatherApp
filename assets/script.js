@@ -25,13 +25,13 @@ function searchApi (cityQuery) {
 
           var lon = queryRes[0].lon;
 
-        searchApiWeather(lat, lon);
+        searchApiWeather(cityQuery, lat, lon);
       }
     )
  };
 
  //2nd Api search to get the weather 
-function searchApiWeather (lat, lon) {
+function searchApiWeather (cityQuery, lat, lon) {
     var cityWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=a1151b795e9b200b2aec48ef61846024";
     
 
@@ -44,12 +44,15 @@ function searchApiWeather (lat, lon) {
       }
       )
       
-//display results
-var resultBody = document.createElement('div');
-var titleEl = document.createElement('h3');
+        //display results
+        var resultBody = document.createElement('div');
+        var titleEl = document.createElement('h3');
 
-titleEl.textContent = "City: " + cityQuery;
-resultBody.append(titleEl);
+        resultContentEl.append(resultBody);
+
+        titleEl.textContent = "City: " + cityQuery;
+        console.log (cityQuery);
+        resultBody.append(titleEl);
 };
 
 
