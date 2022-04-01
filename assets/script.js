@@ -9,10 +9,10 @@ function getParams() {
     //Sets the search value to the value of cityQuery 
     var cityQuery = searchParamsArr[0].split('=').pop();
 
-    searchApi (cityQuery);
+    searchApi (cityQuery); 
 };
 
-
+//1st Api Search to get the city
 function searchApi (cityQuery) {
     var cityQueryUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityQuery + "&appid=a1151b795e9b200b2aec48ef61846024";
 
@@ -21,10 +21,55 @@ function searchApi (cityQuery) {
           return response.json();
       })
       .then(function(queryRes) {
-          console.log(queryRes[0].lat);
+          var lat = queryRes[0].lat;
+
+          var lon = queryRes[0].lon;
+
+        searchApiWeather(lat, lon);
+      }
+    )
+ };
+
+ //2nd Api search to get the weather 
+function searchApiWeather (lat, lon) {
+    var cityWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=a1151b795e9b200b2aec48ef61846024";
+    
+
+    fetch(cityWeatherUrl)
+      .then(function(response) {
+          return response.json();
+      })
+      .then(function(weatherRes) {
+          console.log(weatherRes);
       }
       )
-      };
+      
+//display results
+var resultBody = document.createElement('div');
+var titleEl = document.createElement('h3');
+
+titleEl.textContent = "City: " + cityQuery;
+resultBody.append(titleEl);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function handleSearchFormSubmit(event) {
     event.preventDefault();
