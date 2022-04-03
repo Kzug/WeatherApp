@@ -22,7 +22,6 @@ function searchApi (cityQuery) {
       })
       .then(function(queryRes) {
           var lat = queryRes[0].lat;
-
           var lon = queryRes[0].lon;
 
         searchApiWeather(cityQuery, lat, lon);
@@ -32,7 +31,7 @@ function searchApi (cityQuery) {
 
  //2nd Api search to get the weather 
 function searchApiWeather (cityQuery, lat, lon) {
-    var cityWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=a1151b795e9b200b2aec48ef61846024";
+    var cityWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=a1151b795e9b200b2aec48ef61846024";
     
 
     fetch(cityWeatherUrl)
@@ -41,19 +40,52 @@ function searchApiWeather (cityQuery, lat, lon) {
       })
       .then(function(weatherRes) {
           console.log(weatherRes);
-      }
-      )
-      
+         
+
         //display results
+
+        var cityTemp = weatherRes.current.temp;
+        var cityHum = weatherRes.current.humidity;
+        var date = Date();
+        var uvi = weatherRes.current.uvi;
+        var icon = weatherRes.current.weather[0].icon;
+        var wind = weatherRes.current.wind_speed;
+
         var resultBody = document.createElement('div');
         var titleEl = document.createElement('h3');
+        var dateEl = document.createElement('h3');
+        var tempEl = document.createElement('h4');
+        var humEl = document.createElement('h4');
+        var uviEl = document.createElement('h4');
+        var iconEl = document.createElement('img');
+        var windEl = document.createElement('h4');
 
         resultContentEl.append(resultBody);
 
         titleEl.textContent = "City: " + cityQuery;
-        console.log (cityQuery);
         resultBody.append(titleEl);
-};
+
+        dateEl.textContent = "Date: " + date;
+        resultBody.append(dateEl);
+ 
+        tempEl.textContent = "Current temperature: " + cityTemp + " degrees farenheit";
+        resultBody.append(tempEl);
+
+        humEl.textContent = "Humidity: " + cityHum + "%";
+        resultBody.append(humEl);
+
+        windEl.textContent = "Windspeed: " + wind;
+        resultBody.append(windEl);
+
+        uviEl.textContent = "UVI: " + uvi;
+        resultBody.append(uviEl);
+
+      //link for icon image
+        iconEl.src = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+        resultBody.append(iconEl);
+      }
+      )
+};      
 
 
 
