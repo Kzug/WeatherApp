@@ -43,13 +43,14 @@ function searchApiWeather (cityQuery, lat, lon) {
          
 
         //display results
-
         var cityTemp = weatherRes.current.temp;
         var cityHum = weatherRes.current.humidity;
         var date = Date();
         var uvi = weatherRes.current.uvi;
         var icon = weatherRes.current.weather[0].icon;
         var wind = weatherRes.current.wind_speed;
+
+        var daily = weatherRes.daily[0].temp.day;
 
         var resultBody = document.createElement('div');
         var titleEl = document.createElement('h3');
@@ -83,6 +84,25 @@ function searchApiWeather (cityQuery, lat, lon) {
       //link for icon image
         iconEl.src = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
         resultBody.append(iconEl);
+
+
+        //5-day forecast
+
+      var fiveDayResult = document.querySelector(".five-result-content");
+
+
+// 5-day forecast 
+      for (var i=0; i < 5; i++) {
+
+        var fiveDayResultEl = document.createElement ('h3');
+        fiveDayResultEl.textContent = "Weather: " + weatherRes.daily[i].temp.day;
+        fiveDayResult.append(fiveDayResultEl);
+
+      }
+
+    
+
+      
       }
       )
 };      
