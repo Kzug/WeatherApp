@@ -81,6 +81,13 @@ function searchApiWeather (cityQuery, lat, lon) {
         uviEl.textContent = "UVI: " + uvi;
         resultBody.append(uviEl);
 
+        if (uvi < 2) {
+          uviEl.classList.add("green");
+        } else {
+          uviEl.classList.add("red");
+        }
+        
+
       //link for icon image
         iconEl.src = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
         resultBody.append(iconEl);
@@ -94,10 +101,12 @@ function searchApiWeather (cityQuery, lat, lon) {
 // 5-day forecast 
       for (var i=0; i < 5; i++) {
 
+        var timestamp = weatherRes.daily[i].dt 
+        var fiveDayDate = new Date(timestamp);
         var fiveDayResultEl = document.createElement ('h3');
-        fiveDayResultEl.textContent = "Weather: " + weatherRes.daily[i].temp.day;
-        fiveDayResult.append(fiveDayResultEl);
 
+        fiveDayResultEl.textContent = fiveDayDate + weatherRes.daily[i].temp.day + " degrees farenheit";
+        fiveDayResult.append(fiveDayResultEl);
       }
 
     
