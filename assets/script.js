@@ -1,3 +1,5 @@
+console.log(moment.unix(1649271600).format("MMM Do YYYY"));
+
 var resultTextEl = document.querySelector("#result-text");
 var resultContentEl = document.querySelector("#result-content");
 var searchFormEl = document.querySelector("#search-form");
@@ -96,24 +98,20 @@ function searchApiWeather (cityQuery, lat, lon) {
         //5-day forecast
 
       var fiveDayResult = document.querySelector(".five-result-content");
-
+      var fiveDayForecast = weatherRes.daily;
 
 // 5-day forecast 
-      for (var i=0; i < 5; i++) {
+      for (var i=1; i < fiveDayForecast.length - 2; i++) {
 
-        var timestamp = weatherRes.daily[i].dt 
-        var fiveDayDate = new Date(timestamp);
-        var fiveDayResultEl = document.createElement ('h3');
-
-        fiveDayResultEl.textContent = fiveDayDate + weatherRes.daily[i].temp.day + " degrees farenheit";
-        fiveDayResult.append(fiveDayResultEl);
-      }
-
-    
-
-      
-      }
-      )
+        var timestamp = fiveDayForecast[i].dt;
+        var finalDate = moment.unix(timestamp).format("MMM Do YYYY" + ":" + " ");
+       
+        var fiveDayTempEl = document.createElement ('h3');
+        fiveDayTempEl.textContent = finalDate + weatherRes.daily[i].temp.day + " degrees farenheit";
+        fiveDayResult.append(fiveDayTempEl);
+      }  
+    }
+  )
 };      
 
 
