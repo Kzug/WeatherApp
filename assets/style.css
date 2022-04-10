@@ -2,10 +2,14 @@ body {
     background-color: teal;
 };
 
-green {
-    color: green;
+.green {
+    color: purple !important;
 }
 
-red {
+.red {
     color: red;
+}
+
+.yellow {
+    color: yellow;
 }
