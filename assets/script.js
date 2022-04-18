@@ -1,40 +1,43 @@
-// console.log(moment.unix(1649271600).format("MMM Do YYYY"));
-
 var resultTextEl = document.querySelector("#result-text");
 var resultContentEl = document.querySelector("#result-content");
 var searchFormEl = document.querySelector("#search-form");
 var searchHistory = document.querySelector("#search-history") 
+var searchHistoryArray = [];
 
-// function getParams() {
-//      // Get the search params out of URL and convert it to an array 
-//     var searchParamsArr = document.location.search.split('&');
+if (localStorage.getItem ("searchHistoryArrayKey")) {
+  searchHistoryArray = localStorage.getItem ("searchHistoryArrayKey").split(",");
+};
 
-//     //Sets the search value to the value of cityQuery 
-//     var cityQuery = searchParamsArr[0].split('=').pop();
-//     console.log(cityQuery);
-//     searchApi (cityQuery); 
 
-    // var searchHistoryEl = document.createElement('li');
-    // searchHistoryEl.textContent = cityQuery;
-    // searchHistory.append(searchHistoryEl);
-// };
+for (var i = 0; i < searchHistoryArray.length; i++) {
+  var searchHistoryEl = document.createElement('li');
+  searchHistoryEl.textContent = searchHistoryArray[i];
+  searchHistory.append(searchHistoryEl);
+  searchHistoryEl.addEventListener ("click", handleSearchFormSubmitAgain);
+  };
 
 //1st Api Search to get the city
 function searchApi (cityQuery) {
     var cityQueryUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityQuery + "&appid=a1151b795e9b200b2aec48ef61846024";
+    var searchHistoryEl = document.createElement('li');
 
     fetch(cityQueryUrl)
       .then(function (response) {
           return response.json();
       })
       .then(function(queryRes) {
-        console.log(lat);
           var lat = queryRes[0].lat;
           var lon = queryRes[0].lon;
 
         searchApiWeather(cityQuery, lat, lon);
       }
     )
+      
+    searchHistoryEl.textContent = cityQuery;
+    searchHistory.append(searchHistoryEl);
+    searchHistoryArray.push(cityQuery);
+    console.log(searchHistoryArray);
+   localStorage.setItem("searchHistoryArrayKey", searchHistoryArray);
  };
 
  //2nd Api search to get the weather 
@@ -155,4 +158,11 @@ function handleSearchFormSubmit(event) {
 
 searchFormEl.addEventListener('submit', handleSearchFormSubmit);
 
-// getParams();
+
+function handleSearchFormSubmitAgain(event) {
+  event.preventDefault();
+
+  var searchInputVal = event.target.innerHTML;
+  searchApi(searchInputVal);
+
+}
