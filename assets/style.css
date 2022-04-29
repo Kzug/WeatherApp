@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(240, 225, 240);
+    background-color: white;
 };
 
 .green {
@@ -12,4 +12,20 @@ body {
 
 .yellow {
     color: yellow;
+}
+
+.card
+{
+    display: inline-block;
+}
+
+.navTitle {
+    color: white;
+}
+
+.navbar {
+    background-color: #1A237E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
