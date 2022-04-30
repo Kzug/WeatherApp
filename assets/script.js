@@ -92,8 +92,7 @@ function searchApiWeather(cityQuery, lat, lon) {
       dateEl.textContent = date;
       resultBody.append(dateEl);
 
-      tempEl.textContent =
-        "Current temperature: " + cityTemp + " degrees farenheit";
+      tempEl.textContent = "Current temperature: " + cityTemp + " ℉";
       resultBody.append(tempEl);
 
       humEl.textContent = "Humidity: " + cityHum + "%";
@@ -131,10 +130,11 @@ function searchApiWeather(cityQuery, lat, lon) {
 
         var cardContainer = document.createElement("div");
         cardContainer.classList.add("card");
-
+        var fiveDayTime = document.createElement("h3");
+        fiveDayTime.innerHTML = finalDate;
+        cardContainer.append(fiveDayTime);
         var fiveDayTempEl = document.createElement("h3");
-        fiveDayTempEl.textContent =
-          finalDate + weatherRes.daily[i].temp.day + " degrees farenheit";
+        fiveDayTempEl.textContent = weatherRes.daily[i].temp.day + "℉";
         cardContainer.append(fiveDayTempEl);
 
         var fiveDayIconEl = document.createElement("img");

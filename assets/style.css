@@ -17,6 +17,8 @@ body {
 .card
 {
     display: inline-block;
+    padding: 5px;
+    margin: 5px;
 }
 
 .navTitle {
@@ -29,3 +31,8 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.five-result-content {
+    width: 100%;
+}
+
