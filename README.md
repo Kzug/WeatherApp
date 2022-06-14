@@ -1,5 +1,3 @@
-A weather dashboard that displays the current forecast of the city and a five day forecast, including windspeed and hummidity among other facts.
+A weather dashboard that displays the current weather of a city and the next five day forecast. It features dynamically updated HTML and CSS and uses local storage to store persistant data. It uses two third-party APIs provided by OpenWeather.
 
-It uses two APIs from Open Weather
-
-![picture of weather app](./assets/weatherappscreenshot.png)
+![picture of weather app](./assets\weatherapp2.png)
