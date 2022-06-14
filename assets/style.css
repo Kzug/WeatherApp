@@ -36,3 +36,23 @@ body {
     width: 100%;
 }
 
+.list-group-item {
+    margin-bottom: 3px;
+}
+
+.searchBtn {
+    margin-top: 3px;
+    background-color: #1A237E;
+    color: white;
+    margin-bottom: 10px;
+    width:190px;
+}
+
+.border {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.fivedaydiv{
+    margin-top:25px;
+}

@@ -12,6 +12,9 @@ for (var i = 0; i < searchHistoryArray.length; i++) {
   var searchHistoryEl = document.createElement("li");
   searchHistoryEl.textContent = searchHistoryArray[i];
   searchHistory.append(searchHistoryEl);
+  searchHistoryEl.classList.add("list-group-item");
+  searchHistoryEl.classList.add("bg-secondary");
+  searchHistoryEl.classList.add("bg-opacity-50");
   searchHistoryEl.addEventListener("click", handleSearchFormSubmitAgain);
 }
 
@@ -39,9 +42,17 @@ function searchApi(cityQuery) {
     return;
   }
 
+  if (cityQuery === "") {
+    alert("Please type in a city!");
+    return;
+  }
+
   searchHistoryEl.textContent = cityQuery;
   searchHistoryEl.addEventListener("click", handleSearchFormSubmitAgain);
   searchHistory.append(searchHistoryEl);
+  searchHistoryEl.classList.add("list-group-item");
+  searchHistoryEl.classList.add("bg-secondary");
+  searchHistoryEl.classList.add("bg-opacity-50");
   searchHistoryArray.push(cityQuery);
   console.log(searchHistoryArray);
   localStorage.setItem("searchHistoryArrayKey", searchHistoryArray);
@@ -85,6 +96,8 @@ function searchApiWeather(cityQuery, lat, lon) {
       resultContentEl.innerHTML = "";
 
       resultContentEl.append(resultBody);
+      resultContentEl.classList.add("border");
+      resultContentEl.classList.add("border-dark");
 
       titleEl.textContent = cityQuery;
       resultBody.append(titleEl);
@@ -105,7 +118,6 @@ function searchApiWeather(cityQuery, lat, lon) {
       resultBody.append(uviEl);
 
       if (uvi < 3) {
-        // uviEl.classList.add("green");
         uviEl.style.color = "green";
       } else if (uvi >= 3 && uvi <= 7) {
         uviEl.classList.add("yellow");
